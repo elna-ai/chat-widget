@@ -1,0 +1,153 @@
+.chat-bubble {
+  margin-top: 0.5rem;
+  display: flex;
+  width: 100%;
+  gap: 0.5rem;
+
+  &--user {
+    flex-direction: row-reverse;
+  }
+
+  &__wrapper--user{
+    flex-direction: row-reverse;
+    align-self: flex-end;
+  }
+
+  &__name {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    width: 2rem;
+    height: 2rem;
+    background-color: var(--primary-color);
+    border-radius: 0.25rem;
+    padding: 0.25rem;
+
+    &--bot {
+      background-color: var(--green-600);
+    }
+  }
+
+  &__message {
+    white-space: pre-line;
+    
+    &--wrapper{
+      min-width: 100%;
+      max-width: 24rem;
+      padding: 0.75rem;
+
+      &--bot {
+        background-color: white;
+        border-bottom-left-radius: 0.5rem;
+      }
+
+      &--user {
+        color: white;
+        border-top-left-radius: 0.5rem;
+        border-bottom-left-radius: 0.5rem;
+        border-bottom-right-radius: 0.5rem;
+        background-color: var(--primary-color);
+      }
+    }
+  }
+}
+
+.chat-header {
+  text-align: left;
+
+  &__avatar {
+    flex-shrink: 0;
+
+  }
+}
+
+.chat-body {
+  width: 100%;
+  margin-top: 7rem;
+  margin-bottom: 120px;
+
+  &--wrapper {
+    margin: 0 2rem;
+  }
+}
+
+// TODO: refactor from here
+.typing {
+  align-items: center;
+  display: flex;
+  height: 17px;
+
+  .dot {
+    animation: dotTypingAnimation 1.8s infinite ease-in-out;
+    background-color: #99cbcf;
+    opacity: 1;
+    height: 5px;
+    border-radius: 50%;
+    margin-right: 0.25rem;
+    vertical-align: middle;
+    width: 5px;
+    display: inline-block;
+
+    &:nth-child(1) {
+      animation-delay: 200ms;
+    }
+
+    &:nth-child(2) {
+      animation-delay: 300ms;
+    }
+
+    &:nth-child(3) {
+      animation-delay: 400ms;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+
+@keyframes dotTypingAnimation {
+  0% {
+    transform: translateY(0px);
+    background-color: #99cbcf;
+    opacity: 1;
+  }
+
+  28% {
+    transform: translateY(-7px);
+    background-color: #99cbcf;
+    opacity: 0.9;
+  }
+
+  44% {
+    transform: translateY(0px);
+    background-color: #99cbcf;
+    opacity: 0.8;
+  }
+}
+
+.media-body .msg-box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.media-body .msg-box > div {
+  padding: 0.625rem 1rem;
+  border-radius: 1.25rem;
+  display: inline-block;
+  position: relative;
+}
+
+.media-body .msg-box > div {
+  background: #f2f2f2;
+}
+
+.media-body .msg-box:first-child > div {
+  border-top-left-radius: 0;
+}
