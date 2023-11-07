@@ -1,5 +1,6 @@
 import { useState } from "react";
 import classNames from "classnames";
+import chatIcon from "../images/chat-icon.webp";
 
 import Chat from "./Chat";
 
@@ -23,13 +24,12 @@ function Widget({
         dark: theme === "dark",
       })}
     >
-      <div className="widget__box">
-        <div
-          className="widget__title"
-          onClick={() => setIsOpen((prev) => !prev)}
-        >
-          {title}
-        </div>
+      <div
+        className={classNames("widget__box", {
+          "widget__box--close": !isOpen,
+        })}
+      >
+        <div className="widget__title">{title}</div>
         <div
           className={classNames("widget__chat", {
             "widget__chat--close": !isOpen,
@@ -38,6 +38,12 @@ function Widget({
           <Chat wizardId={wizardId} />
         </div>
       </div>
+      <button
+        className="widget__icon"
+        onClick={() => setIsOpen((prev) => !prev)}
+      >
+        <img className="widget__icon__img" src={chatIcon} alt="chat icon" />
+      </button>
     </div>
   );
 }
