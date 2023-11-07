@@ -1,0 +1,35 @@
+.widget {
+  &__wrapper {
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+  }
+
+  &__box {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__title {
+    background-color: var(--elna-title-color);
+    color: white;
+    margin-top: auto;
+    padding: 0.25rem 0.5rem;
+  }
+
+  &__chat {
+    display: block;
+    overflow: hidden;
+    background-color: #eff5fd;
+    height: 100%;
+    &--close {
+      display: none;
+    }
+  }
+}

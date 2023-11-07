@@ -17,7 +17,9 @@
     "react": "^18.2.0",
     "react-bootstrap": "^2.9.1",
     "react-dom": "^18.2.0",
+    "react-use-websocket": "^4.5.0",
     "uuid": "^9.0.1"
+    
   },
   "devDependencies": {
     "@rollup/plugin-typescript": "^11.1.5",
@@ -34,7 +36,8 @@
     "eslint-plugin-react-refresh": "^0.4.3",
     "sass": "^1.69.5",
     "typescript": "^5.0.2",
-    "vite": "^4.4.5"
+    "vite": "^4.4.5",
+    "vite-plugin-css-injected-by-js": "^3.3.0"
   },
   "description": "Embeddable third-party widget library for Elna Wizards",
   "keywords": [
@@ -53,5 +56,8 @@
       "import": "./dist/library.js",
       "require": "./dist/library.umd.cjs"
     }
-  }
+  },
+  "sideEffects": [
+    "**/*.css"
+  ]
 }

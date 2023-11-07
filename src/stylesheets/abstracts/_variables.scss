@@ -1,11 +1,21 @@
-:root{
---bs-body-font-family: "DM Sans", sans-serif;
---primary-color: #007d88;
-// --primary-hover-color: #00717a;
-// --primary-success: #00d67f;
+:root {
+  --elna-primary-600: #007d88;
+  --elna-dark-primary-600: red;
+  --elna-green-600: rgb(22 163 74);
+  --elna-primary-color: var(--elna-primary-600);
+  --elna-title-color: var(--elna-dark-primary-600);
 
-// tailwind color
-// --gray-100: rgb(243 244 246);
-// --gray-700: rgb(55 65 81);
---green-600: rgb(22 163 74);
+  @media (prefers-color-scheme: dark) {
+    --elna-primary-color: var(--elna-dark-primary-600);
+    .widget__wrapper.light {
+      --elna-primary-color: var(--elna-primary-600);
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    --elna-primary-color: #007d88;
+    .widget__wrapper.dark {
+      --elna-primary-color: var(--elna-dark-primary-600);
+    }
+  }
 }
