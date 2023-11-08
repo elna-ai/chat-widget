@@ -18,7 +18,7 @@ function Widget({
   theme = "system",
   description = "Hi there! 🚀  Ask me any questions",
   logo,
-  chatBg
+  chatBg,
 }: WidgetProps) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -39,12 +39,19 @@ function Widget({
             "widget__title--open": isOpen,
           })}
           onClick={() => setIsOpen((prev) => !prev)}
-        > <div className="">
-            <img src={logo}></img>
-            {title}
-            <span>
-              {description}
-            </span>
+        >
+          <div className="widget__title__group">
+            <img
+              src={logo}
+              alt="logo"
+              className="widget__title__group__image"
+            />
+            <div>
+              <div className="widget__title__group__title">{title}</div>
+              <div className="widget__title__group__description">
+                {description}
+              </div>
+            </div>
           </div>
           <svg
             width="24"
@@ -68,6 +75,7 @@ function Widget({
             wizardId={wizardId}
             onClose={() => setIsOpen((prev) => !prev)}
             chatBg={chatBg}
+            description={description}
           />
         </div>
       </div>

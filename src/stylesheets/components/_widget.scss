@@ -63,13 +63,36 @@
     color: #000804;
     margin-top: auto;
     padding: 0.25rem 0.5rem;
-
     height: 58px;
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
-    border: 1px solid #5FFEB8;
+    border: 1px solid #5ffeb8;
     display: flex;
     align-items: center;
+    cursor: pointer;
+
+    &__group {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+
+      &__image {
+        max-width: 40px;
+        height: auto;
+      }
+
+      &__title {
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 20px;
+      }
+
+      &__description {
+        font-weight: 400;
+        font-size: 10px;
+        line-height: 15px;
+      }
+    }
 
     &--open {
       display: none;

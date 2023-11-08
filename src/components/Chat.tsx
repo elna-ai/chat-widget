@@ -1,6 +1,5 @@
 import "../stylesheets/index.scss";
 
-
 import { useState, useRef, useEffect, useCallback } from "react";
 import axios from "axios";
 // import Button from "react-bootstrap/Button";
@@ -16,11 +15,11 @@ type Message = {
     isBot?: boolean;
   };
   message: string;
-
 };
 
 type ChatProps = {
   wizardId: string;
+  description: string;
   onClose: () => void;
   chatBg?: string;
 };
@@ -31,7 +30,7 @@ type WizardDetails = {
   name: string;
 };
 
-function Chat({ wizardId, onClose, chatBg }: ChatProps) {
+function Chat({ wizardId, onClose, chatBg, description }: ChatProps) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [messageInput, setMessageInput] = useState("");
   const [isResponseLoading, setIsResponseLoading] = useState(false);
@@ -127,15 +126,21 @@ function Chat({ wizardId, onClose, chatBg }: ChatProps) {
 
   return (
     <div className="chat-wrapper">
-      <header className="chat-header" style={{ backgroundImage: `url:(${chatBg})` }}>
+      <header
+        className="chat-header"
+        style={{ backgroundImage: `url(${chatBg})` }}
+      >
         <div className="chat-header__wrapper">
           <img
             src={avatarImg}
             alt="wizard image"
             className=" chat-header__avatar"
           />
-          <h3 className="chat-header__title">{wizard?.name}</h3>
-          <p style={{ marginLeft: "auto" }} onClick={onClose}>
+          <div>
+            <h3 className="chat-header__title">{wizard?.name}</h3>
+            <div className="chat-header__description">{description}</div>
+          </div>
+          <p className="chat-header__close" onClick={onClose}>
             <svg
               width="24"
               height="24"
@@ -155,7 +160,6 @@ function Chat({ wizardId, onClose, chatBg }: ChatProps) {
             </svg>
           </p>
         </div>
-        <hr />
       </header>
       <div className="chat-body">
         <div className="chat-body--wrapper">
@@ -185,7 +189,7 @@ function Chat({ wizardId, onClose, chatBg }: ChatProps) {
       <div className="chat-footer">
         <div className="chat-footer__input-wrapper">
           <textarea
-            placeholder="Send a message"
+            placeholder="Write a reply"
             className="chat-footer__input-wrapper__input"
             value={messageInput}
             ref={inputRef}
@@ -197,7 +201,18 @@ function Chat({ wizardId, onClose, chatBg }: ChatProps) {
             className="chat-footer__input-wrapper__button"
             disabled={!messageInput.trim() || isResponseLoading}
           >
-            Send
+            <svg
+              width="17"
+              height="18"
+              viewBox="0 0 17 18"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0.5 9.83358H5.5V8.16691H0.5V0.538249C0.5 0.308132 0.68655 0.121582 0.916667 0.121582C0.986875 0.121582 1.05595 0.139324 1.11747 0.173165L16.5028 8.63517C16.7045 8.746 16.7781 8.99942 16.6672 9.201C16.6291 9.27025 16.5721 9.32725 16.5028 9.36533L1.11747 17.8272C0.915833 17.9382 0.662475 17.8647 0.551575 17.663C0.517742 17.6015 0.5 17.5324 0.5 17.4622V9.83358Z"
+                fill="black"
+              />
+            </svg>
           </button>
         </div>
         <a

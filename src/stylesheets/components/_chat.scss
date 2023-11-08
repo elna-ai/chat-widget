@@ -1,7 +1,7 @@
 .chat-bubble {
   margin-top: 0.5rem;
   display: flex;
-  width: 100%;
+  width: calc(100% - 1rem);
   gap: 0.5rem;
 
   &--user {
@@ -61,6 +61,7 @@
 
 .chat-header {
   text-align: left;
+  background-size: cover;
 
   &__wrapper {
     display: flex;
@@ -70,8 +71,22 @@
   }
 
   &__title {
-    font-size: large;
-    margin: 0.5rem 0;
+    font-weight: 800;
+    margin: 0;
+    line-height: 20px;
+  }
+
+  &__description {
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 15px;
+  }
+
+  &__close {
+    margin: 0;
+    margin-left: auto;
+    align-self: flex-start;
+    cursor: pointer;
   }
 
   &__avatar {
@@ -157,14 +172,17 @@
     &__input {
       width: calc(100% - 1rem);
       padding: 0.5rem;
-      border: 2px solid #d6eaec;
+      border: 0;
+      border-top: 1px solid #ececec;
+      background-color: transparent;
     }
 
     &__button {
       position: absolute;
       top: 15px;
       right: 15px;
-      bottom: 15px px;
+      bottom: 15px;
+      background-color: transparent;
     }
   }
 
