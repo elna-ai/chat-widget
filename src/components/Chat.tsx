@@ -33,7 +33,9 @@ function Chat({ wizardId }: ChatProps) {
   const [isResponseLoading, setIsResponseLoading] = useState(false);
   const [wizard, setWizard] = useState<WizardDetails>();
   const [isLoading, setIsLoading] = useState(true);
-  const [socketUrl] = useState(`wss://api.elna.live/chat?uuid=${wizardId}`);
+  const [socketUrl] = useState(
+    `${import.meta.env.VITE_CHAT_SOCKET_BASE}/chat?uuid=${wizardId}`
+  );
 
   const inputRef = useRef<HTMLTextAreaElement | null>(null);
   const lastBubbleRef = useRef<HTMLDivElement | null>(null);
@@ -120,29 +122,20 @@ function Chat({ wizardId }: ChatProps) {
   if (isLoading || wizard === undefined) return <div>Page loading</div>;
 
   return (
-    <div
-      style={{
-        display: "grid",
-        height: "100%",
-        gridTemplateRows: "auto 1fr auto",
-      }}
-    >
-      <header className="text-left">
-        <div className="d-flex align-items-center chat-header__block">
-          <div className="chat-header__avatar">
-            <div className="avatar">
-              <img src={avatarImg} alt="wizard image" className="avatar-img" />
-            </div>
-          </div>
-          <div className="flex-grow-1 ms-3">
-            <h3 className="text-lg mt-2">{wizard?.name}</h3>
-          </div>
+    <div className="chat-wrapper">
+      <header className="chat-header">
+        <div className="chat-header__wrapper">
+          <img
+            src={avatarImg}
+            alt="wizard image"
+            className=" chat-header__avatar"
+          />
+          <h3 className="chat-header__title">{wizard?.name}</h3>
         </div>
-        <hr className="mt-2" />
+        <hr />
       </header>
       <div className="chat-body">
-        {/* TODO: media query to be converted to scss */}
-        <div className="sm:mx-2 chat-body--wrapper">
+        <div className="chat-body--wrapper">
           {messages.length > 0 ? (
             <>
               {messages.map(({ user, message }, index) => (
@@ -167,33 +160,31 @@ function Chat({ wizardId }: ChatProps) {
         </div>
       </div>
       <div className="chat-footer">
-        <div className="chatfooter-bg shadow rounded">
-          <div className="chat-footer__input-wrapper">
-            <textarea
-              placeholder="Send a message"
-              className="rounded-3 chat-input-area resize-none chat-footer__input-wrapper__input"
-              value={messageInput}
-              ref={inputRef}
-              onKeyDown={handleKeyDown}
-              onChange={(event) => setMessageInput(event.target.value)}
-            ></textarea>
-            <button
-              onClick={handleSubmit}
-              className="chat-footer__input-wrapper__button"
-              disabled={!messageInput.trim() || isResponseLoading}
-            >
-              Send
-            </button>
-          </div>
-          <a
-            href="https://gpdbs-xqaaa-aaaah-adtiq-cai.raw.icp0.io/"
-            className="text-muted fs-8 text-center justify-content-center"
-            rel="noreferrer noopener"
-            target="_blank"
+        <div className="chat-footer__input-wrapper">
+          <textarea
+            placeholder="Send a message"
+            className="chat-footer__input-wrapper__input"
+            value={messageInput}
+            ref={inputRef}
+            onKeyDown={handleKeyDown}
+            onChange={(event) => setMessageInput(event.target.value)}
+          ></textarea>
+          <button
+            onClick={handleSubmit}
+            className="chat-footer__input-wrapper__button"
+            disabled={!messageInput.trim() || isResponseLoading}
           >
-            POWERED BY ELNA
-          </a>
+            Send
+          </button>
         </div>
+        <a
+          className="chat-footer__link"
+          href="https://gpdbs-xqaaa-aaaah-adtiq-cai.raw.icp0.io/"
+          rel="noreferrer noopener"
+          target="_blank"
+        >
+          POWERED BY ELNA
+        </a>
       </div>
     </div>
   );
