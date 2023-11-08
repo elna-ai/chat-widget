@@ -1,12 +1,13 @@
 :root {
   --elna-primary-600: #007d88;
-  --elna-dark-primary-600: red;
+  --elna-dark-primary-600: #03fd8e;
   --elna-green-600: rgb(22 163 74);
   --elna-primary-color: var(--elna-primary-600);
   --elna-title-color: var(--elna-dark-primary-600);
 
   @media (prefers-color-scheme: dark) {
     --elna-primary-color: var(--elna-dark-primary-600);
+
     .widget__wrapper.light {
       --elna-primary-color: var(--elna-primary-600);
     }
@@ -14,6 +15,7 @@
 
   @media (prefers-color-scheme: light) {
     --elna-primary-color: #007d88;
+
     .widget__wrapper.dark {
       --elna-primary-color: var(--elna-dark-primary-600);
     }

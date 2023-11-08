@@ -132,7 +132,7 @@ function Chat({ wizardId }: ChatProps) {
       }}
     >
       <header className="text-left">
-        <div className="d-flex align-items-center">
+        <div className="d-flex align-items-center chat-header__block">
           <div className="chat-header__avatar">
             <div className="avatar">
               {imgUrl && (
@@ -193,7 +193,7 @@ function Chat({ wizardId }: ChatProps) {
           </div>
           <a
             href="https://gpdbs-xqaaa-aaaah-adtiq-cai.raw.icp0.io/"
-            className="text-muted fs-8 text-center"
+            className="text-muted fs-8 text-center justify-content-center"
             rel="noreferrer noopener"
             target="_blank"
           >
