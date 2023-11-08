@@ -1,5 +1,6 @@
 import "../stylesheets/index.scss";
 
+
 import { useState, useRef, useEffect, useCallback } from "react";
 import axios from "axios";
 // import Button from "react-bootstrap/Button";
@@ -15,11 +16,13 @@ type Message = {
     isBot?: boolean;
   };
   message: string;
+
 };
 
 type ChatProps = {
   wizardId: string;
   onClose: () => void;
+  chatBg?: string;
 };
 
 type WizardDetails = {
@@ -28,7 +31,7 @@ type WizardDetails = {
   name: string;
 };
 
-function Chat({ wizardId, onClose }: ChatProps) {
+function Chat({ wizardId, onClose, chatBg }: ChatProps) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [messageInput, setMessageInput] = useState("");
   const [isResponseLoading, setIsResponseLoading] = useState(false);
@@ -124,7 +127,7 @@ function Chat({ wizardId, onClose }: ChatProps) {
 
   return (
     <div className="chat-wrapper">
-      <header className="chat-header">
+      <header className="chat-header" style={{ backgroundImage: `url:(${chatBg})` }}>
         <div className="chat-header__wrapper">
           <img
             src={avatarImg}

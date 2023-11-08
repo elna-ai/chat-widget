@@ -64,6 +64,13 @@
     margin-top: auto;
     padding: 0.25rem 0.5rem;
 
+    height: 58px;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    border: 1px solid #5FFEB8;
+    display: flex;
+    align-items: center;
+
     &--open {
       display: none;
     }
