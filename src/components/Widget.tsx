@@ -8,7 +8,7 @@ type WidgetProps = {
   title?: string;
   theme?: "light" | "dark" | "system";
   description?: string;
-  logo?: string;
+  logo: string;
   chatBg?: string;
 };
 
@@ -76,6 +76,7 @@ function Widget({
             onClose={() => setIsOpen((prev) => !prev)}
             chatBg={chatBg}
             description={description}
+            logo={logo}
           />
         </div>
       </div>

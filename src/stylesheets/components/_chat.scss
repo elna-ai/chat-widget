@@ -20,13 +20,8 @@
     color: #000804;
     width: 2rem;
     height: 2rem;
-    background-color: var(--elna-primary-color);
     border-radius: 0.25rem;
     padding: 0.25rem;
-
-    &--bot {
-      background-color: var(--elna-green-600);
-    }
   }
 
   &__message {
@@ -175,6 +170,7 @@
       border: 0;
       border-top: 1px solid #ececec;
       background-color: transparent;
+      resize: none;
     }
 
     &__button {
@@ -190,5 +186,8 @@
     display: flex;
     justify-content: center;
     font-size: 12px;
+    gap: 0.5rem;
+    color: unset;
+    align-items: center;
   }
 }

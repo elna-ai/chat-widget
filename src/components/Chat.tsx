@@ -2,12 +2,11 @@ import "../stylesheets/index.scss";
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import axios from "axios";
-// import Button from "react-bootstrap/Button";
 import { v4 as uuidv4 } from "uuid";
 import useWebSocket from "react-use-websocket";
 
 import Bubble from "./Bubble";
-import avatarImg from "../images/avatars/01.png";
+import ElnaLogo from "./ElnaLogo";
 
 type Message = {
   user: {
@@ -20,6 +19,7 @@ type Message = {
 type ChatProps = {
   wizardId: string;
   description: string;
+  logo: string;
   onClose: () => void;
   chatBg?: string;
 };
@@ -30,7 +30,7 @@ type WizardDetails = {
   name: string;
 };
 
-function Chat({ wizardId, onClose, chatBg, description }: ChatProps) {
+function Chat({ wizardId, onClose, chatBg, description, logo }: ChatProps) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [messageInput, setMessageInput] = useState("");
   const [isResponseLoading, setIsResponseLoading] = useState(false);
@@ -132,8 +132,8 @@ function Chat({ wizardId, onClose, chatBg, description }: ChatProps) {
       >
         <div className="chat-header__wrapper">
           <img
-            src={avatarImg}
-            alt="wizard image"
+            src={logo}
+            alt="wizard avatar"
             className=" chat-header__avatar"
           />
           <div>
@@ -171,12 +171,14 @@ function Chat({ wizardId, onClose, chatBg, description }: ChatProps) {
                   user={user}
                   message={message}
                   ref={index === messages.length - 1 ? lastBubbleRef : null}
+                  botImage={logo}
                 />
               ))}
               {isResponseLoading && (
                 <Bubble
                   key={uuidv4()}
                   user={{ name: wizard?.name, isBot: true }}
+                  botImage={logo}
                   isLoading
                 />
               )}
@@ -221,7 +223,8 @@ function Chat({ wizardId, onClose, chatBg, description }: ChatProps) {
           rel="noreferrer noopener"
           target="_blank"
         >
-          POWERED BY ELNA
+          <span>POWERED BY </span>
+          <ElnaLogo />
         </a>
       </div>
     </div>

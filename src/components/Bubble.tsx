@@ -9,9 +9,10 @@ type BubbleProps = {
     isBot?: boolean;
   };
   isLoading?: boolean;
+  botImage: string;
 } & React.HTMLProps<HTMLDivElement>;
 
-function Bubble({ user, message, isLoading = false }: BubbleProps) {
+function Bubble({ user, message, isLoading = false, botImage }: BubbleProps) {
   // const bubbleRef = useRef<HTMLDivElement | null>(null);
 
   const isUserBot = user?.isBot ?? false;
@@ -24,12 +25,8 @@ function Bubble({ user, message, isLoading = false }: BubbleProps) {
       })}
     >
       {isUserBot && (
-        <div
-          className={classNames("chat-bubble__name", {
-            "chat-bubble__name--bot": isUserBot,
-          })}
-        >
-          {user?.name[0]?.toUpperCase()}
+        <div className="chat-bubble__name">
+          <img src={botImage} />
         </div>
       )}
       <div>
