@@ -1,4 +1,4 @@
-import { useRef } from "react";
+// import { useRef } from "react";
 import classNames from "classnames";
 import DOMPurify from "dompurify";
 
@@ -23,13 +23,15 @@ function Bubble({ user, message, isLoading = false }: BubbleProps) {
         "chat-bubble--user": !isUserBot,
       })}
     >
-      <div
-        className={classNames("chat-bubble__name", {
-          "chat-bubble__name--bot": isUserBot,
-        })}
-      >
-        {user?.name[0]?.toUpperCase()}
-      </div>
+      {isUserBot && (
+        <div
+          className={classNames("chat-bubble__name", {
+            "chat-bubble__name--bot": isUserBot,
+          })}
+        >
+          {user?.name[0]?.toUpperCase()}
+        </div>
+      )}
       <div>
         <div
           className={classNames("chat-bubble__message--wrapper", {

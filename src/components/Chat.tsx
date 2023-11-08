@@ -19,6 +19,7 @@ type Message = {
 
 type ChatProps = {
   wizardId: string;
+  onClose: () => void;
 };
 
 type WizardDetails = {
@@ -27,7 +28,7 @@ type WizardDetails = {
   name: string;
 };
 
-function Chat({ wizardId }: ChatProps) {
+function Chat({ wizardId, onClose }: ChatProps) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [messageInput, setMessageInput] = useState("");
   const [isResponseLoading, setIsResponseLoading] = useState(false);
@@ -131,6 +132,9 @@ function Chat({ wizardId }: ChatProps) {
             className=" chat-header__avatar"
           />
           <h3 className="chat-header__title">{wizard?.name}</h3>
+          <p style={{ marginLeft: "auto" }} onClick={onClose}>
+            close
+          </p>
         </div>
         <hr />
       </header>
