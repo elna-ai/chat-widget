@@ -2,7 +2,7 @@ import "../stylesheets/index.scss";
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import axios from "axios";
-import Button from "react-bootstrap/Button";
+// import Button from "react-bootstrap/Button";
 import { v4 as uuidv4 } from "uuid";
 import useWebSocket from "react-use-websocket";
 
@@ -183,13 +183,13 @@ function Chat({ wizardId }: ChatProps) {
               onKeyDown={handleKeyDown}
               onChange={(event) => setMessageInput(event.target.value)}
             ></textarea>
-            <Button
+            <button
               onClick={handleSubmit}
               className="chat-footer__input-wrapper__button"
               disabled={!messageInput.trim() || isResponseLoading}
             >
               Send
-            </Button>
+            </button>
           </div>
           <a
             href="https://gpdbs-xqaaa-aaaah-adtiq-cai.raw.icp0.io/"
