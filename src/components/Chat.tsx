@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from "uuid";
 import useWebSocket from "react-use-websocket";
 
 import Bubble from "./Bubble";
-import { AVATAR_DUMMY_IMAGE } from "../constants";
+import avatarImg from "../images/avatars/01.png";
 
 type Message = {
   user: {
@@ -31,9 +31,6 @@ function Chat({ wizardId }: ChatProps) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [messageInput, setMessageInput] = useState("");
   const [isResponseLoading, setIsResponseLoading] = useState(false);
-  const [selectedImage] = useState(
-    Math.floor(Math.random() * AVATAR_DUMMY_IMAGE.length)
-  );
   const [wizard, setWizard] = useState<WizardDetails>();
   const [isLoading, setIsLoading] = useState(true);
   const [socketUrl] = useState(`wss://api.elna.live/chat?uuid=${wizardId}`);
@@ -95,7 +92,6 @@ function Chat({ wizardId }: ChatProps) {
     }
   }, [messages]);
 
-  const imgUrl = AVATAR_DUMMY_IMAGE[selectedImage];
   const handleClickSendMessage = useCallback(
     (message: string) => sendMessage(message),
     []
@@ -135,9 +131,7 @@ function Chat({ wizardId }: ChatProps) {
         <div className="d-flex align-items-center chat-header__block">
           <div className="chat-header__avatar">
             <div className="avatar">
-              {imgUrl && (
-                <img src={imgUrl} alt="wizard image" className="avatar-img" />
-              )}
+              <img src={avatarImg} alt="wizard image" className="avatar-img" />
             </div>
           </div>
           <div className="flex-grow-1 ms-3">

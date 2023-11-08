@@ -56,5 +56,4 @@
       "require": "./dist/library.umd.cjs"
     }
   }
-
 }
