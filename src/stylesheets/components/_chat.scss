@@ -205,6 +205,15 @@
       bottom: 0;
       background-color: transparent;
 
+      &:hover {
+        border: transparent;
+      }
+
+      &:disabled {
+        opacity: .5;
+        cursor: not-allowed;
+      }
+
       &:focus,
       &:focus-visible {
         outline: none;

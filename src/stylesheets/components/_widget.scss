@@ -31,10 +31,12 @@
   }
 
   &__box {
+
+    margin: 0 30px;
     z-index: 2500;
     position: fixed;
     bottom: 0;
-    right: 30px;
+    right: 0;
     transform-origin: right bottom;
     height: min(700px, 100% - 104px);
     min-height: 80px;
@@ -42,7 +44,7 @@
     max-height: 704px;
     overflow: hidden;
     opacity: 1;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 5px 40px;
+    box-shadow: #00000061 0 5px 40px;
     transition: width 200ms ease 0s, height 200ms ease 0s,
       max-height 200ms ease 0s, transform 300ms cubic-bezier(0, 1.2, 1, 1) 0s,
       opacity 83ms ease-out 0s;
@@ -61,7 +63,7 @@
     background-color: var(--elna-title-color);
     color: #000804;
     margin-top: auto;
-    padding: 0.25rem 0.5rem;
+    padding: 0.25rem 0.75rem;
     height: 58px;
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
@@ -69,11 +71,14 @@
     display: flex;
     align-items: center;
     cursor: pointer;
+    box-shadow: #03fd8e 0 5px 20px;
+    margin-left: 30px;
+    margin-right: 30px;
 
     &__group {
       display: flex;
       align-items: center;
-      gap: 0.25rem;
+      gap: 0.5rem;
 
       &__image {
         max-width: 40px;
