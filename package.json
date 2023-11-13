@@ -1,6 +1,6 @@
 {
   "name": "@elna-ai/chat-widget",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -43,6 +43,12 @@
     "elna",
     "ai"
   ],
+  "module": "./dist/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/library.js"
+    }
+  },
   "author": "elna",
   "license": "ISC",
   "files": [
