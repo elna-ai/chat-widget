@@ -1,6 +1,6 @@
 {
   "name": "@elna-ai/chat-widget",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -33,9 +33,10 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
     "sass": "^1.69.5",
-    "typescript": "^5.0.2",
+    "typescript": "^5.2.2",
     "vite": "^4.4.5",
-    "vite-plugin-css-injected-by-js": "^3.3.0"
+    "vite-plugin-css-injected-by-js": "^3.3.0",
+    "vite-plugin-dts": "^3.6.3"
   },
   "description": "Embeddable third-party widget library for Elna Wizards",
   "keywords": [
@@ -46,13 +47,5 @@
   "license": "ISC",
   "files": [
     "dist"
-  ],
-  "main": "./dist/library.umd.cjs",
-  "module": "./dist/library.js",
-  "exports": {
-    ".": {
-      "import": "./dist/library.js",
-      "require": "./dist/library.umd.cjs"
-    }
-  }
+  ]
 }
