@@ -2,15 +2,7 @@ import { useState } from "react";
 import classNames from "classnames";
 
 import Chat from "./Chat";
-
-type WidgetProps = {
-  wizardId: string;
-  title?: string;
-  theme?: "light" | "dark" | "system";
-  description?: string;
-  logo: string;
-  chatBg?: string;
-};
+import { WidgetProps } from "../../lib/index";
 
 function Widget({
   wizardId,

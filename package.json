@@ -1,10 +1,11 @@
 {
   "name": "@elna-ai/chat-widget",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "copy-dts": "copyfiles -u 1 \"lib/**/*.d.ts\" dist",
+    "build": "tsc && vite build && npm run copy-dts",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
@@ -29,14 +30,14 @@
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "@vitejs/plugin-react": "^4.0.3",
+    "copyfiles": "^2.4.1",
     "eslint": "^8.45.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
     "sass": "^1.69.5",
     "typescript": "^5.2.2",
     "vite": "^4.4.5",
-    "vite-plugin-css-injected-by-js": "^3.3.0",
-    "vite-plugin-dts": "^3.6.3"
+    "vite-plugin-css-injected-by-js": "^3.3.0"
   },
   "description": "Embeddable third-party widget library for Elna Wizards",
   "keywords": [
