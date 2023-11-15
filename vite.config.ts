@@ -11,7 +11,7 @@ export default defineConfig({
       entry: resolve(__dirname, "lib/main.ts"),
       name: "@elna/chat-widget",
       fileName: "index",
-      formats: ['es']
+      formats: ['es',"cjs"]
     },
     rollupOptions: {
       external: ["react", "react-dom"],
