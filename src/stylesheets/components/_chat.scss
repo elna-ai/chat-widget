@@ -17,7 +17,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #000804;
+    color: var(--elna-chat-bubble-name-color);
     width: 2rem;
     height: 2rem;
     border-radius: 0.25rem;
@@ -33,15 +33,15 @@
       padding: 0.75rem;
 
       &--bot {
-        background-color: #ECECEC;
+        background-color: var(--elna-chat-bubble-bot-bg-color);
         border-bottom-left-radius: 1rem;
-        color: #000804;
+        color: var(--elna-chat-bubble-bot-color);
         border-bottom-right-radius: 1rem;
         border-top-right-radius: 1rem;
       }
 
       &--user {
-        color: #fff;
+        color: var(--elna-chat-bubble-user-color);
         border-top-left-radius: 1rem;
         border-bottom-left-radius: 1rem;
         border-bottom-right-radius: 1rem;
@@ -66,7 +66,6 @@
     align-items: center;
     padding: 1rem;
     gap: 1rem;
-
   }
 
   &__title {
@@ -97,13 +96,13 @@
 }
 
 .chat-header__wrapper img {
-  background-color: #000200;
-  border: 1px solid rgb(255 255 255 / 30%);
+  background-color: var(--elna-chat-wrapper-img-bg);
+  border: 1px solid var(--elna-chat-wrapper-border-color);
 }
 
 .chat-bubble__name img {
-  background-color: #000200;
-  border: 1px solid rgba(255, 255, 255, .3);
+  background-color: var(--elna-chat-bubble-name-bg);
+  border: 1px solid var(--elna-chat-bubble-name-border-color);
   border-radius: 4px;
   width: 2rem;
 }
@@ -126,7 +125,7 @@
 
   .dot {
     animation: dotTypingAnimation 1.8s infinite ease-in-out;
-    background-color: #99cbcf;
+    background-color: var(--elna-chat-loading-color);
     opacity: 1;
     height: 5px;
     border-radius: 50%;
@@ -156,19 +155,19 @@
 @keyframes dotTypingAnimation {
   0% {
     transform: translateY(0px);
-    background-color: #99cbcf;
+    background-color: var(--elna-chat-loading-color);
     opacity: 1;
   }
 
   28% {
     transform: translateY(-7px);
-    background-color: #99cbcf;
+    background-color: var(--elna-chat-loading-color);
     opacity: 0.9;
   }
 
   44% {
     transform: translateY(0px);
-    background-color: #99cbcf;
+    background-color: var(--elna-chat-loading-color);
     opacity: 0.8;
   }
 }
@@ -187,13 +186,13 @@
       border-top: 1px solid #ececec;
       background-color: transparent;
       resize: none;
-      color: #000804;
+      color: var(--elna-input-color);
       font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 
       &:focus,
       &:focus-visible {
         outline: none;
-        color: #000804;
+        color: var(--elna-input-color);
         border-radius: 0.25rem;
       }
     }
@@ -210,7 +209,7 @@
       }
 
       &:disabled {
-        opacity: .5;
+        opacity: 0.5;
         cursor: not-allowed;
       }
 
@@ -227,10 +226,10 @@
     font-size: 12px;
     gap: 0.5rem;
     align-items: center;
-    color: rgb(0 8 4 / 40%);
+    color: var(--elna-footer-link-color);
 
     &:hover {
-      color: rgb(0 8 4 / 40%);
+      color: var(--elna-footer-link-color);
     }
   }
 }

@@ -2,9 +2,27 @@
   --elna-primary-600: #007d88;
   --elna-dark-primary-600: #03fd8e;
   --elna-green-600: rgb(22 163 74);
+  --elna-widget-title-border: #5ffeb8;
+  --elna-widget-title-box-shadow: #03fd8e;
+  --elna-primary-user-color: #158152;
+  --elna-widget-box-shadow-color: #00000061;
+  --elna-widget-title-color: #000804;
+  --elna-chat-bubble-name-color: #000804;
+  --elna-chat-bubble-bot-color: #000804;
+  --elna-input-color: #000804;
+  --elna-widget-image-bg-color: #000200;
+  --elna-chat-wrapper-img-bg: #000200;
+  --elna-chat-bubble-name-bg: #000200;
+  --elna-chat-widget-bg-color: #eff5fd;
+  --elna-chat-bubble-bot-bg-color: #ececec;
+  --elna-chat-bubble-user-color: #fff;
+  --elna-chat-loading-color: #99cbcf;
+  --elna-chat-wrapper-border-color: rgb(255 255 255 / 30%);
+  --elna-chat-bubble-name-border-color: rgba(255, 255, 255, 0.3);
+  --elna-footer-link-color: rgb(0 8 4 / 40%);
+
   --elna-primary-color: var(--elna-primary-600);
   --elna-title-color: var(--elna-dark-primary-600);
-  --elna-primary-user-color: #158152;
 
   // @media (prefers-color-scheme: dark) {
   //   --elna-primary-color: var(--elna-dark-primary-600);
