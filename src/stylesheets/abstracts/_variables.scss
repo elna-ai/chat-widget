@@ -6,19 +6,19 @@
   --elna-title-color: var(--elna-dark-primary-600);
   --elna-primary-user-color: #158152;
 
-  @media (prefers-color-scheme: dark) {
-    --elna-primary-color: var(--elna-dark-primary-600);
+  // @media (prefers-color-scheme: dark) {
+  //   --elna-primary-color: var(--elna-dark-primary-600);
 
-    .widget__wrapper.light {
-      --elna-primary-color: var(--elna-primary-600);
-    }
-  }
+  //   .widget__wrapper.light {
+  //     --elna-primary-color: var(--elna-primary-600);
+  //   }
+  // }
 
-  @media (prefers-color-scheme: light) {
-    --elna-primary-color: #007d88;
+  // @media (prefers-color-scheme: light) {
+  //   --elna-primary-color: #007d88;
 
-    .widget__wrapper.dark {
-      --elna-primary-color: var(--elna-dark-primary-600);
-    }
-  }
+  //   .widget__wrapper.dark {
+  //     --elna-primary-color: var(--elna-dark-primary-600);
+  //   }
+  // }
 }

@@ -7,7 +7,6 @@ import { WidgetProps } from "../../lib/index";
 function Widget({
   wizardId,
   title = "Support",
-  theme = "system",
   description = "Hi there! 🚀  Ask me any questions",
   logo,
   chatBg,
@@ -15,12 +14,7 @@ function Widget({
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div
-      className={classNames("widget__wrapper", {
-        light: theme === "light",
-        dark: theme === "dark",
-      })}
-    >
+    <div className="widget__wrapper">
       <div
         className={classNames("widget__box", {
           "widget__box--close": !isOpen,
