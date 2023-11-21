@@ -185,6 +185,10 @@
     margin: 0 auto;
     margin-top: 0.5rem;
     width: max-content;
+
+    &__name {
+      font-weight: 600;
+    }
   }
 
   &__input-wrapper {
