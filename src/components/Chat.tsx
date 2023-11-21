@@ -189,6 +189,9 @@ function Chat({ wizardId, onClose, chatBg, description, logo }: ChatProps) {
         </div>
       </div>
       <div className="chat-footer">
+        <div className="chat-footer__warning">
+          {`${wizard.name} can make mistakes. Consider checking important information.`}
+        </div>
         <div className="chat-footer__input-wrapper">
           <textarea
             placeholder="Write a reply"
