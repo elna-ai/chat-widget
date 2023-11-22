@@ -36,6 +36,7 @@ function Chat({ wizardId, onClose, chatBg, description, logo }: ChatProps) {
   const [isResponseLoading, setIsResponseLoading] = useState(false);
   const [wizard, setWizard] = useState<WizardDetails>();
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState("");
   const [socketUrl] = useState(
     `${import.meta.env.VITE_CHAT_SOCKET_BASE}/chat?uuid=${wizardId}`
   );
@@ -62,6 +63,12 @@ function Chat({ wizardId, onClose, chatBg, description, logo }: ChatProps) {
           `${import.meta.env.VITE_CHAT_API_BASE}/agent`,
           { params: { uuid: wizardId } }
         );
+        if (!data?.data?.data?.agent) {
+          setError("unable to load wizard");
+          setIsLoading(false);
+          throw new Error("unable to find wizard ");
+        }
+        setError("");
         setWizard(data.data.data.agent);
       } catch (e) {
         console.error(e);
@@ -122,7 +129,11 @@ function Chat({ wizardId, onClose, chatBg, description, logo }: ChatProps) {
 
   useEffect(() => inputRef?.current?.focus(), [wizard]);
 
-  if (isLoading || wizard === undefined) return <div>Page loading</div>;
+  console.log({ error });
+
+  if ((isLoading || wizard === undefined) && error === "") {
+    return <div>Page loading</div>;
+  }
 
   return (
     <div className="chat-wrapper">
@@ -161,77 +172,85 @@ function Chat({ wizardId, onClose, chatBg, description, logo }: ChatProps) {
           </p>
         </div>
       </header>
-      <div className="chat-body">
-        <div className="chat-body--wrapper">
-          {messages.length > 0 ? (
-            <>
-              {messages.map(({ user, message }, index) => (
-                <Bubble
-                  key={uuidv4()}
-                  user={user}
-                  message={message}
-                  ref={index === messages.length - 1 ? lastBubbleRef : null}
-                  botImage={logo}
-                />
-              ))}
-              {isResponseLoading && (
-                <Bubble
-                  key={uuidv4()}
-                  user={{ name: wizard?.name, isBot: true }}
-                  botImage={logo}
-                  isLoading
-                />
+      {error !== "" ? (
+        <div>{error}</div>
+      ) : (
+        <>
+          <div className="chat-body">
+            <div className="chat-body--wrapper">
+              {messages.length > 0 ? (
+                <>
+                  {messages.map(({ user, message }, index) => (
+                    <Bubble
+                      key={uuidv4()}
+                      user={user}
+                      message={message}
+                      ref={
+                        index === messages.length - 1 ? lastBubbleRef : null
+                      }
+                      botImage={logo}
+                    />
+                  ))}
+                  {isResponseLoading && (
+                    <Bubble
+                      key={uuidv4()}
+                      user={{ name: wizard?.name as string, isBot: true }}
+                      botImage={logo}
+                      isLoading
+                    />
+                  )}
+                </>
+              ) : (
+                <div>No History </div>
               )}
-            </>
-          ) : (
-            <div>No History </div>
-          )}
-        </div>
-      </div>
-      <div className="chat-footer">
-        <div className="chat-footer__warning">
-          <span>Heads up: </span>
-          <span className="chat-footer__warning__name">{`${wizard.name}`}</span>
-          <span> might slip up; double-check crucial info.</span>
-        </div>
-        <div className="chat-footer__input-wrapper">
-          <textarea
-            placeholder="Write a reply"
-            className="chat-footer__input-wrapper__input"
-            value={messageInput}
-            ref={inputRef}
-            onKeyDown={handleKeyDown}
-            onChange={(event) => setMessageInput(event.target.value)}
-          ></textarea>
-          <button
-            onClick={handleSubmit}
-            className="chat-footer__input-wrapper__button"
-            disabled={!messageInput.trim() || isResponseLoading}
-          >
-            <svg
-              width="17"
-              height="18"
-              viewBox="0 0 17 18"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+            </div>
+          </div>
+          <div className="chat-footer">
+            <div className="chat-footer__warning">
+              <span>Heads up: </span>
+              <span className="chat-footer__warning__name">{`${wizard?.name}`}</span>
+              <span> might slip up; double-check crucial info.</span>
+            </div>
+            <div className="chat-footer__input-wrapper">
+              <textarea
+                placeholder="Write a reply"
+                className="chat-footer__input-wrapper__input"
+                value={messageInput}
+                ref={inputRef}
+                onKeyDown={handleKeyDown}
+                onChange={(event) => setMessageInput(event.target.value)}
+              ></textarea>
+              <button
+                onClick={handleSubmit}
+                className="chat-footer__input-wrapper__button"
+                disabled={!messageInput.trim() || isResponseLoading}
+              >
+                <svg
+                  width="17"
+                  height="18"
+                  viewBox="0 0 17 18"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M0.5 9.83358H5.5V8.16691H0.5V0.538249C0.5 0.308132 0.68655 0.121582 0.916667 0.121582C0.986875 0.121582 1.05595 0.139324 1.11747 0.173165L16.5028 8.63517C16.7045 8.746 16.7781 8.99942 16.6672 9.201C16.6291 9.27025 16.5721 9.32725 16.5028 9.36533L1.11747 17.8272C0.915833 17.9382 0.662475 17.8647 0.551575 17.663C0.517742 17.6015 0.5 17.5324 0.5 17.4622V9.83358Z"
+                    fill="black"
+                  />
+                </svg>
+              </button>
+            </div>
+            <a
+              className="chat-footer__link"
+              href="https://gpdbs-xqaaa-aaaah-adtiq-cai.raw.icp0.io/"
+              rel="noreferrer noopener"
+              target="_blank"
             >
-              <path
-                d="M0.5 9.83358H5.5V8.16691H0.5V0.538249C0.5 0.308132 0.68655 0.121582 0.916667 0.121582C0.986875 0.121582 1.05595 0.139324 1.11747 0.173165L16.5028 8.63517C16.7045 8.746 16.7781 8.99942 16.6672 9.201C16.6291 9.27025 16.5721 9.32725 16.5028 9.36533L1.11747 17.8272C0.915833 17.9382 0.662475 17.8647 0.551575 17.663C0.517742 17.6015 0.5 17.5324 0.5 17.4622V9.83358Z"
-                fill="black"
-              />
-            </svg>
-          </button>
-        </div>
-        <a
-          className="chat-footer__link"
-          href="https://gpdbs-xqaaa-aaaah-adtiq-cai.raw.icp0.io/"
-          rel="noreferrer noopener"
-          target="_blank"
-        >
-          <span>POWERED BY </span>
-          <ElnaLogo />
-        </a>
-      </div>
+              <span>POWERED BY </span>
+              <ElnaLogo />
+            </a>
+          </div>
+        </>
+      )}
     </div>
   );
 }
