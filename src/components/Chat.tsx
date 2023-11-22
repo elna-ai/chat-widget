@@ -129,8 +129,6 @@ function Chat({ wizardId, onClose, chatBg, description, logo }: ChatProps) {
 
   useEffect(() => inputRef?.current?.focus(), [wizard]);
 
-  console.log({ error });
-
   if ((isLoading || wizard === undefined) && error === "") {
     return <div>Page loading</div>;
   }
