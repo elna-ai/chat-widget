@@ -7,6 +7,7 @@ import useWebSocket from "react-use-websocket";
 
 import Bubble from "./Bubble";
 import ElnaLogo from "./ElnaLogo";
+import useAutoSizeTextArea from "../hooks/useAutoResizeTextArea";
 
 type Message = {
   user: {
@@ -41,9 +42,10 @@ function Chat({ wizardId, onClose, chatBg, description, logo }: ChatProps) {
     `${import.meta.env.VITE_CHAT_SOCKET_BASE}/chat?uuid=${wizardId}`
   );
 
-  const inputRef = useRef<HTMLTextAreaElement | null>(null);
-  const lastBubbleRef = useRef<HTMLDivElement | null>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
+  const lastBubbleRef = useRef<HTMLDivElement>(null);
   const { sendMessage, lastMessage } = useWebSocket(socketUrl);
+  useAutoSizeTextArea(inputRef.current, messageInput);
 
   useEffect(() => {
     if (wizard === undefined || isLoading === true) return;
@@ -217,6 +219,7 @@ function Chat({ wizardId, onClose, chatBg, description, logo }: ChatProps) {
                 ref={inputRef}
                 onKeyDown={handleKeyDown}
                 onChange={(event) => setMessageInput(event.target.value)}
+                rows={1}
               ></textarea>
               <button
                 onClick={handleSubmit}
