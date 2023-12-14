@@ -140,6 +140,7 @@ function Chat({ wizardId, onClose, chatBg, description, logo }: ChatProps) {
       <header
         className="chat-header"
         style={{ backgroundImage: `url(${chatBg})` }}
+        onClick={onClose}
       >
         <div className="chat-header__wrapper">
           <img
@@ -151,24 +152,13 @@ function Chat({ wizardId, onClose, chatBg, description, logo }: ChatProps) {
             <h3 className="chat-header__title">{wizard?.name}</h3>
             <div className="chat-header__description">{description}</div>
           </div>
-          <p className="chat-header__close" onClick={onClose}>
-            <svg
-              width="24"
+          <p className="chat-header__close">
+
+            <svg width="24"
               height="24"
               viewBox="0 0 24 24"
               fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22Z"
-                fill="white"
-                fill-opacity="0.15"
-              />
-              <path
-                d="M9.87913 8.46492L12.0005 10.5863L14.1217 8.46493C14.5123 8.0744 15.1454 8.0744 15.536 8.46492C15.9265 8.85544 15.9265 9.4886 15.536 9.87912L13.4147 12.0005L15.536 14.1218C15.9265 14.5123 15.9265 15.1454 15.536 15.536C15.1454 15.9265 14.5123 15.9265 14.1218 15.536L12.0005 13.4147L9.87912 15.536C9.4886 15.9265 8.85545 15.9265 8.46492 15.536C8.0744 15.1454 8.0744 14.5123 8.46493 14.1217L10.5863 12.0005L8.46492 9.87913C8.0744 9.4886 8.07439 8.85544 8.46492 8.46492C8.85544 8.07439 9.4886 8.0744 9.87913 8.46492Z"
-                fill="white"
-              />
-            </svg>
+              xmlns="http://www.w3.org/2000/svg"><path d="M12.0001 19.1643L18.2072 12.9572L16.793 11.543L12.0001 16.3359L7.20718 11.543L5.79297 12.9572L12.0001 19.1643ZM12.0001 13.5144L18.2072 7.30728L16.793 5.89307L12.0001 10.686L7.20718 5.89307L5.79297 7.30728L12.0001 13.5144Z" fill="rgba(249,249,249,1)"></path></svg>
           </p>
         </div>
       </header>
@@ -235,20 +225,22 @@ function Chat({ wizardId, onClose, chatBg, description, logo }: ChatProps) {
                 >
                   <path
                     d="M0.5 9.83358H5.5V8.16691H0.5V0.538249C0.5 0.308132 0.68655 0.121582 0.916667 0.121582C0.986875 0.121582 1.05595 0.139324 1.11747 0.173165L16.5028 8.63517C16.7045 8.746 16.7781 8.99942 16.6672 9.201C16.6291 9.27025 16.5721 9.32725 16.5028 9.36533L1.11747 17.8272C0.915833 17.9382 0.662475 17.8647 0.551575 17.663C0.517742 17.6015 0.5 17.5324 0.5 17.4622V9.83358Z"
-                    fill="black"
+                    fill="white"
                   />
                 </svg>
               </button>
             </div>
-            <a
-              className="chat-footer__link"
-              href="https://gpdbs-xqaaa-aaaah-adtiq-cai.raw.icp0.io/"
-              rel="noreferrer noopener"
-              target="_blank"
-            >
-              <span>POWERED BY </span>
-              <ElnaLogo />
-            </a>
+            <div className="chat-footer__wrapper">
+              <a
+                className="chat-footer__wrapper__link"
+                href="https://gpdbs-xqaaa-aaaah-adtiq-cai.raw.icp0.io/"
+                rel="noreferrer noopener"
+                target="_blank"
+              >
+                <span>POWERED BY </span>
+                <ElnaLogo />
+              </a>
+            </div>
           </div>
         </>
       )}
