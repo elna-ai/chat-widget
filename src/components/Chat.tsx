@@ -44,7 +44,11 @@ function Chat({ wizardId, onClose, chatBg, description, logo }: ChatProps) {
 
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const lastBubbleRef = useRef<HTMLDivElement>(null);
-  const { sendMessage, lastMessage } = useWebSocket(socketUrl);
+  const { sendMessage, lastMessage } = useWebSocket(socketUrl, {
+    onError: () => {
+      setError("unable to load wizard");
+    },
+  });
   useAutoSizeTextArea(inputRef.current, messageInput);
 
   useEffect(() => {
@@ -68,12 +72,11 @@ function Chat({ wizardId, onClose, chatBg, description, logo }: ChatProps) {
         if (!data?.data?.data?.agent) {
           setError("unable to load wizard");
           setIsLoading(false);
-          throw new Error("unable to find wizard ");
         }
         setError("");
         setWizard(data.data.data.agent);
       } catch (e) {
-        console.error(e);
+        setError("Unable to load agent. Please contact support");
         // TODO:add generic error to be displayed to the user
       } finally {
         setIsLoading(false);
@@ -131,8 +134,14 @@ function Chat({ wizardId, onClose, chatBg, description, logo }: ChatProps) {
 
   useEffect(() => inputRef?.current?.focus(), [wizard]);
 
-  if ((isLoading || wizard === undefined) && error === "") {
-    return <div>Page loading</div>;
+  function displayErrorOrPageLoading() {
+    if (isLoading) {
+      return <div style={{ color: "black" }}>Loading Agent details</div>;
+    }
+
+    if (error) {
+      return <div style={{ color: "black" }}>{error}</div>;
+    }
   }
 
   return (
@@ -153,17 +162,23 @@ function Chat({ wizardId, onClose, chatBg, description, logo }: ChatProps) {
             <div className="chat-header__description">{description}</div>
           </div>
           <p className="chat-header__close">
-
-            <svg width="24"
+            <svg
+              width="24"
               height="24"
               viewBox="0 0 24 24"
               fill="none"
-              xmlns="http://www.w3.org/2000/svg"><path d="M12.0001 19.1643L18.2072 12.9572L16.793 11.543L12.0001 16.3359L7.20718 11.543L5.79297 12.9572L12.0001 19.1643ZM12.0001 13.5144L18.2072 7.30728L16.793 5.89307L12.0001 10.686L7.20718 5.89307L5.79297 7.30728L12.0001 13.5144Z" fill="rgba(249,249,249,1)"></path></svg>
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12.0001 19.1643L18.2072 12.9572L16.793 11.543L12.0001 16.3359L7.20718 11.543L5.79297 12.9572L12.0001 19.1643ZM12.0001 13.5144L18.2072 7.30728L16.793 5.89307L12.0001 10.686L7.20718 5.89307L5.79297 7.30728L12.0001 13.5144Z"
+                fill="rgba(249,249,249,1)"
+              ></path>
+            </svg>
           </p>
         </div>
       </header>
-      {error !== "" ? (
-        <div>{error}</div>
+      {error !== "" || isLoading ? (
+        displayErrorOrPageLoading()
       ) : (
         <>
           <div className="chat-body">
