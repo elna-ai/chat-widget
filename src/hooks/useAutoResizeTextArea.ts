@@ -12,7 +12,6 @@ const useAutoSizeTextArea = (
 
 
     textAreaRef.style.height = `inherit`;
-    console.log(textAreaRef.scrollHeight);
     const newHeight = Math.min(
       Math.max(textAreaRef.scrollHeight, MIN_TEXT_AREA_HEIGHT),
       MAX_TEXT_AREA_HEIGHT
