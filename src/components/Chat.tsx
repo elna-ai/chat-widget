@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from "uuid";
 import Bubble from "./Bubble";
 import ElnaLogo from "./ElnaLogo";
 import useAutoSizeTextArea from "../hooks/useAutoResizeTextArea";
-import { WizardDetails, getWizardDetails } from "../utils";
+import { WizardDetails, getWizardDetails, transformHistory } from "../utils";
 
 type Message = {
   user: {
@@ -80,7 +80,7 @@ function Chat({ wizardId, onClose, chatBg, description, logo }: ChatProps) {
     }
   }, [messages]);
 
-  const handleSendMessage = async (message: string) => {
+  const handleSendMessage = async (message: string, messages: Message[]) => {
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_CHAT_API_BASE}/chat`,
@@ -89,6 +89,7 @@ function Chat({ wizardId, onClose, chatBg, description, logo }: ChatProps) {
           query_text: message,
           greeting: wizard!.greeting,
           index_name: wizard!.id,
+          history: transformHistory(messages),
         }
       );
       setIsResponseLoading(false);
@@ -106,13 +107,13 @@ function Chat({ wizardId, onClose, chatBg, description, logo }: ChatProps) {
   };
 
   const handleSubmit = async () => {
+    handleSendMessage(messageInput.trim(), messages);
     setMessages((prev) => [
       ...prev,
-      { user: { name: "User" }, message: messageInput.trim() },
+      { user: { name: "User", isBot: false }, message: messageInput.trim() },
     ]);
     setMessageInput("");
     setIsResponseLoading(true);
-    handleSendMessage(messageInput.trim());
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
