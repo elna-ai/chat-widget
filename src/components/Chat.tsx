@@ -1,13 +1,14 @@
 import "../stylesheets/index.scss";
 
 import { useState, useRef, useEffect, useCallback } from "react";
-import axios from "axios";
+// import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 import useWebSocket from "react-use-websocket";
 
 import Bubble from "./Bubble";
 import ElnaLogo from "./ElnaLogo";
 import useAutoSizeTextArea from "../hooks/useAutoResizeTextArea";
+import { getWizardDetails } from "../utils";
 
 type Message = {
   user: {
@@ -65,19 +66,17 @@ function Chat({ wizardId, onClose, chatBg, description, logo }: ChatProps) {
   useEffect(() => {
     const getWizard = async () => {
       try {
-        const data = await axios.get(
-          `${import.meta.env.VITE_CHAT_API_BASE}/agent`,
-          { params: { uuid: wizardId } }
-        );
-        if (!data?.data?.data?.agent) {
-          setError("unable to load wizard");
+        const wizardDetails = await getWizardDetails(wizardId);
+        if (!wizardDetails) {
+          setError("Unable to load agent. Please contact support");
           setIsLoading(false);
+          return;
         }
+
         setError("");
-        setWizard(data.data.data.agent);
+        setWizard(wizardDetails);
       } catch (e) {
         setError("Unable to load agent. Please contact support");
-        // TODO:add generic error to be displayed to the user
       } finally {
         setIsLoading(false);
       }
