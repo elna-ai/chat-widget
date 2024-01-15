@@ -1,14 +1,13 @@
 import "../stylesheets/index.scss";
 
-import { useState, useRef, useEffect, useCallback } from "react";
-// import axios from "axios";
+import { useState, useRef, useEffect } from "react";
+import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
-import useWebSocket from "react-use-websocket";
 
 import Bubble from "./Bubble";
 import ElnaLogo from "./ElnaLogo";
 import useAutoSizeTextArea from "../hooks/useAutoResizeTextArea";
-import { getWizardDetails } from "../utils";
+import { WizardDetails, getWizardDetails } from "../utils";
 
 type Message = {
   user: {
@@ -26,12 +25,6 @@ type ChatProps = {
   chatBg?: string;
 };
 
-type WizardDetails = {
-  biography: string;
-  greeting: string;
-  name: string;
-};
-
 function Chat({ wizardId, onClose, chatBg, description, logo }: ChatProps) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [messageInput, setMessageInput] = useState("");
@@ -39,17 +32,10 @@ function Chat({ wizardId, onClose, chatBg, description, logo }: ChatProps) {
   const [wizard, setWizard] = useState<WizardDetails>();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
-  const [socketUrl] = useState(
-    `${import.meta.env.VITE_CHAT_SOCKET_BASE}/chat?uuid=${wizardId}`
-  );
 
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const lastBubbleRef = useRef<HTMLDivElement>(null);
-  const { sendMessage, lastMessage } = useWebSocket(socketUrl, {
-    onError: () => {
-      setError("unable to load wizard");
-    },
-  });
+
   useAutoSizeTextArea(inputRef.current, messageInput);
 
   useEffect(() => {
@@ -85,20 +71,6 @@ function Chat({ wizardId, onClose, chatBg, description, logo }: ChatProps) {
   }, []);
 
   useEffect(() => {
-    if (wizard === undefined) return;
-
-    if (lastMessage !== null) {
-      setIsResponseLoading(false);
-      const newMessage = {
-        user: { name: wizard.name, isBot: true },
-        message: lastMessage.data,
-      };
-
-      setMessages((prev) => [...prev, newMessage]);
-    }
-  }, [lastMessage, setMessages]);
-
-  useEffect(() => {
     if (lastBubbleRef.current) {
       lastBubbleRef.current.scrollIntoView({
         behavior: "smooth",
@@ -108,10 +80,30 @@ function Chat({ wizardId, onClose, chatBg, description, logo }: ChatProps) {
     }
   }, [messages]);
 
-  const handleClickSendMessage = useCallback(
-    (message: string) => sendMessage(message),
-    []
-  );
+  const handleSendMessage = async (message: string) => {
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_CHAT_API_BASE}/chat`,
+        {
+          biography: wizard!.biography,
+          query_text: message,
+          greeting: wizard!.greeting,
+          index_name: wizard!.id,
+        }
+      );
+      setIsResponseLoading(false);
+      setMessages((prev) => [
+        ...prev,
+        {
+          user: { name: wizard!.name, isBot: true },
+          message: response.data.body.response,
+        },
+      ]);
+    } catch (e) {
+      setIsResponseLoading(false);
+      console.error(e);
+    }
+  };
 
   const handleSubmit = async () => {
     setMessages((prev) => [
@@ -120,7 +112,7 @@ function Chat({ wizardId, onClose, chatBg, description, logo }: ChatProps) {
     ]);
     setMessageInput("");
     setIsResponseLoading(true);
-    handleClickSendMessage(messageInput.trim());
+    handleSendMessage(messageInput.trim());
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {

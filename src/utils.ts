@@ -1,23 +1,22 @@
 import { Actor, HttpAgent } from '@dfinity/agent';
 
+type WizardVisibility = { 'privateVisibility' : null } |
+{ 'publicVisibility' : null } |
+{ 'unlistedVisibility' : null };
+
+ export interface WizardDetails {
+  'id' : string,
+  'userId' : string,
+  'name' : string,
+  'biography' : string,
+  'greeting' : string,
+  'description' : string,
+  'summary' : [] | [string],
+  'visibility' : WizardVisibility,
+  'avatar' : string,
+}
+
 export const getWizardDetails = async (agentId: string) => { 
-  
-   type WizardVisibility = { 'privateVisibility' : null } |
-  { 'publicVisibility' : null } |
-  { 'unlistedVisibility' : null };
-
-   interface WizardDetails {
-    'id' : string,
-    'userId' : string,
-    'name' : string,
-    'biography' : string,
-    'greeting' : string,
-    'description' : string,
-    'summary' : [] | [string],
-    'visibility' : WizardVisibility,
-    'avatar' : string,
-  }
-
 const agent = new HttpAgent({host:"https://icp0.io"});
 const canisterId = import.meta.env.VITE_CANISTER_BACKEND_ID;
 
