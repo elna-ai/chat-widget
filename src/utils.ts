@@ -1,4 +1,5 @@
 import { Actor, HttpAgent } from '@dfinity/agent';
+import { Message } from '../lib';
 
 type WizardVisibility = { 'privateVisibility' : null } |
 { 'publicVisibility' : null } |
@@ -49,4 +50,10 @@ const idlFactory = ({ IDL }: {IDL:any}) => {
 const backendCanister =  Actor.createActor(idlFactory,{agent,canisterId});
 const data = await backendCanister.getWizard(agentId) as WizardDetails[];
 return data[0];
+};
+
+export const transformHistory = (messages: Message[]) => {
+  return messages.map(({user,message}) => 
+    user.isBot ? {role:"assistant", content: message}: {role:"user", content: message}
+  )
 };
