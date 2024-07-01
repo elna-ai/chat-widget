@@ -1,6 +1,6 @@
 {
   "name": "@elna-ai/chat-widget",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "type": "module",
   "description": "Embeddable third-party widget library for Elna Agents",
   "keywords": [
