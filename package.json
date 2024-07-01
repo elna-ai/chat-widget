@@ -1,0 +1,43 @@
+{
+  "name": "@elna-ai/chat-widget",
+  "version": "2.0.0",
+  "type": "module",
+  "description": "Embeddable third-party widget library for Elna Agents",
+  "keywords": [
+    "elna",
+    "ai"
+  ],
+  "author": "elna",
+  "license": "ISC",
+  "files": [
+    "dist",
+    "types"
+  ],
+  "module": "./dist/chat-widget.js",
+  "main": "./dist/chat-widget.cjs",
+  "exports": {
+    ".": {
+      "import": "./dist/chat-widget.js",
+      "require": "./dist/chat-widget.cjs"
+    }
+  },
+  "types": "types/elna-chat-widget.d.ts",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@dfinity/agent": "^1.4.0",
+    "axios": "^1.7.2",
+    "dompurify": "^3.1.5",
+    "lit": "^3.1.4"
+  },
+  "devDependencies": {
+    "@types/dompurify": "^3.0.5",
+    "eslint": "^9.5.0",
+    "prettier": "^3.3.2",
+    "typescript": "^5.2.2",
+    "vite": "^5.3.1"
+  }
+}
